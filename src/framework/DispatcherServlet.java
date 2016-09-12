@@ -19,6 +19,7 @@ package framework;
 
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.lang.reflect.Method;
 import java.util.Map;
 import java.util.Set;
 
@@ -56,13 +57,14 @@ public class DispatcherServlet extends HttpServlet
 		
 		requestUri = requestUri.substring(contextPath.length());
 		System.out.println("requestUri : " + requestUri);
-		Controller controller = mappings.getController(requestUri);
+		CtrlAndMethod cam = mappings.getCtrlAndMethod(requestUri);
 		
-		if(controller == null){ throw new ServletException("요청한 페이지는 존재하지 않습니다"); }
-		ModelAndView mav;
+		if(cam == null){ throw new ServletException("요청한 페이지는 존재하지 않습니다"); }
 		try
 		{
-			mav = controller.execute(req, res);
+			Object target = cam.getTarget();
+			Method method = cam.getMethod();
+			ModelAndView mav = (ModelAndView) method.invoke(target, req, res);
 			String view = mav.getView();
 			if(view.startsWith("redirect:"))
 			{

@@ -5,7 +5,7 @@
   <!-- 필터 클래스 등록 -->
   <filter>
   	<filter-name>encoding</filter-name>
-  	<filter-class>filter.EncodingFilter</filter-class>
+  	<filter-class>kr.co.mlec.filter.EncodingFilter</filter-class>
   	<init-param>
   		<param-name>charset</param-name>
   		<param-value>utf-8</param-value>
@@ -20,7 +20,7 @@
   
   <filter>
      <filter-name>authFilter</filter-name>
-     <filter-class>filter.AuthFilter</filter-class>
+     <filter-class>kr.co.mlec.filter.AuthFilter</filter-class>
      <init-param>
          <param-name>pages</param-name>
          <param-value>
@@ -45,20 +45,8 @@
   	<init-param>
   		<param-name>controllers</param-name>
   		<param-value>
-		  	/jspboard/list.do=jspboard.controller.ListController;
-			/jspboard/detail.do=jspboard.controller.DetailContoller;
-			/jspboard/delete.do=jspboard.controller.DeleteController;
-			/jspboard/updateForm.do=jspboard.controller.UpdateFormContoller;
-			/jspboard/update.do=jspboard.controller.UpdateController;
-			/jspboard/write.do=jspboard.controller.WriteController;
-			/jspboard/writeForm.do=jspboard.controller.WriteFormController;
-			/jspboard/writeReply.do=jspboard.controller.ReplyController;
-			/jspboard/deleteReply.do=jspboard.controller.ReplyDeleteController;
-			/jspboard/updateReply.do=jspboard.controller.ReplyUpdateController;
-			/jspboard/reply.do=jspboard.controller.ReplyListController;
-			/login/loginForm.do=login.LoginFormController;
-			/login/login.do=login.LoginController;
-			/login/logout.do=login.LogoutController
+		  	kr.co.mlec.jspboard.controller.BoardController;
+		  	kr.co.mlec.login.controller.LoginController
   		</param-value>
   	</init-param>
   </servlet>

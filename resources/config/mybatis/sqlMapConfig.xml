@@ -8,9 +8,9 @@
 	
 	<!-- SQL의 결과를 담을 VO 객체들의 별칭을 설정하여 사용의 편의를 도모  -->
 	<typeAliases>
-		<typeAlias alias="board" type="jspboard.BoardVO" />
-		<typeAlias alias="file" type="jspboard.FileVO" />
-		<typeAlias alias="reply" type="jspboard.ReplyVO" />
+		<typeAlias alias="board" type="kr.co.mlec.jspboard.BoardVO" />
+		<typeAlias alias="file" type="kr.co.mlec.jspboard.FileVO" />
+		<typeAlias alias="reply" type="kr.co.mlec.jspboard.ReplyVO" />
 		<!--  <typeAlias alias="search" type="kr.co.mlec.member.SearchVO" /> -->
 	</typeAliases>
 	

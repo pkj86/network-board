@@ -129,7 +129,7 @@
 	function replyList()
 	{
 		$.ajax({
-			url: "/network-board/jspboard/reply.do",
+			url: "/network-board/jspboard/replyList.do",
 			data: {postNo: "${param.postNo}"},
 			dataType: "json"
 		})

@@ -1,9 +1,7 @@
 eclipse.preferences.version=1
-encoding//src/file/Download.java=UTF-8
-encoding//src/file/UploadController.java=UTF-8
-encoding//src/jspboard/BoardDAO.java=UTF-8
-encoding//src/jspboard/BoardVO.java=UTF-8
-encoding//src/jspboard/FileVO.java=UTF-8
-encoding//src/login/LoginController.java=UTF-8
-encoding//src/login/LoginFormController.java=UTF-8
-encoding//src/login/LogoutController.java=UTF-8
+encoding//src/kr/co/mlec/file/Download.java=UTF-8
+encoding//src/kr/co/mlec/file/UploadController.java=UTF-8
+encoding//src/kr/co/mlec/jspboard/BoardDAO.java=UTF-8
+encoding//src/kr/co/mlec/jspboard/BoardVO.java=UTF-8
+encoding//src/kr/co/mlec/jspboard/FileVO.java=UTF-8
+encoding//src/kr/co/mlec/login/controller/LoginController.java=UTF-8
