@@ -7,10 +7,10 @@ import javax.servlet.http.HttpServletResponse;
 
 import framework.Controller;
 import framework.ModelAndView;
+import framework.WebUtil;
 import jspboard.BoardVO;
 import jspboard.service.BoardService;
 import jspboard.service.BoardServiceImpl;
-import util.WebUtil;
 
 public class UpdateController implements Controller
 {

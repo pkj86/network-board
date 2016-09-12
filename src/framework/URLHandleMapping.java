@@ -3,6 +3,8 @@ package framework;
 import java.util.HashMap;
 import java.util.Map;
 
+import javax.servlet.ServletException;
+
 import jspboard.controller.DeleteController;
 import jspboard.controller.DetailContoller;
 import jspboard.controller.ListController;
@@ -26,7 +28,7 @@ public class URLHandleMapping
 	{
 		mappings = new HashMap<>();
 		String[] Names = ctrlNames.split(";");
-		for(int i = 0; i<Names.length; i++)
+		for(int i = 0 ; i < Names.length ; i++)
 		{
 			Names[i] = Names[i].trim();
 			String[] maps = Names[i].split("=");

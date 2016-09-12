@@ -83,7 +83,7 @@
 <div id="replyUpdateDiv">
 	<input type="hidden" name="replyNo" />
 	<span></span>
-	<textarea name="replyContent" rows="1" cols="150"></textarea>
+	<textarea name="rContent" rows="1" cols="150"></textarea>
 	<button>수정</button>
 </div>
 <%-- <table width='80%' border='1'>
@@ -113,10 +113,10 @@
 	<!-- <tr> -->
 		<!-- <td align="center"> -->
 		<input type="hidden" name="postNo" value="${param.postNo}"/>
-		<input type='text' size='10px' name='replyWriter' placeholder='작성자를 입력'/>
+		<input type='text' size='10px' name='rWriter' placeholder='작성자를 입력'/>
 		<!-- </td> -->
 		<!-- <td align="center"> -->
-		<textarea cols='150' rows="1" name='replyContent'>댓글 내용을 입력</textarea>
+		<textarea cols='150' rows="1" name='rContent'>댓글 내용을 입력</textarea>
 		<!-- </td> -->
 		<!-- <td align="center"> -->
 		<input type="submit" value="댓글입력"/>
@@ -173,12 +173,12 @@
 		$.ajax({
 			url: "/network-board/jspboard/writeReply.do",
 			type: "post",
-			data: {postNo: f.postNo.value, replyContent: f.replyContent.value, replyWriter: f.replyWriter.value},
+			data: {postNo: f.postNo.value, rContent: f.rContent.value, rWriter: f.rWriter.value},
 			dataType: "json"
 		})
 		.done(function(result){
-			f.replyContent.value = "";
-			makeReplyList(result);
+			f.rContent.value = "";
+			replyList();
 		});
 		return false;
 	});
@@ -202,7 +202,7 @@
 		console.log(content, replyNo);
 		$.ajax({
 			url: "/network-board/jspboard/updateReply.do",
-			data: {postNo: "${param.postNo}", replyNo: replyNo, replyContent: content}
+			data: {postNo: "${param.postNo}", replyNo: replyNo, rContent: content}
 		})
 		.done(function(){
 			// 수정된 내용 초기화
