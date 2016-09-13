@@ -12,8 +12,8 @@
     	<selectKey keyProperty="postNo" order="BEFORE" resultType="int">
     		select s86_board_no.nextval from dual
    		</selectKey>
-    	insert into t86_board (no, title, writer, content, writer_id)
-    	values (#{postNo}, #{title}, #{writer}, #{content}, #{writerId})
+    	insert into t86_board (no, title, writer, content)
+    	values (#{postNo}, #{title}, #{writer}, #{content})
     </insert>
     <update id="updateBoard" parameterType="board">
     	update t86_board 
@@ -22,11 +22,11 @@
     	where no = #{postNo}    	
     </update>
     <select id="getBoardListAll" resultType="board">
-    	select no as postNo, title, writer, reg_date as regDate, writer_id as writerId
+    	select no as postNo, title, writer, reg_date as regDate
     	from t86_board
     </select>
     <select id="getBoardListOne" parameterType="int" resultType="board">
-    	select no as postNo, title, writer, content, reg_date as regDate, writer_id as writerId
+    	select no as postNo, title, writer, content, reg_date as regDate
     	from t86_board 
     	where no = #{postNo}
     </select>
@@ -45,16 +45,15 @@
     	values (s86_board_file_no.nextval, #{postNo}, #{oriName}, #{realName}, #{path}, #{fileSize})
     </insert>
     <insert id="insertReply" parameterType="reply">
-    	insert into t86_board_reply (reply_no, no, reply_writer, reply_content, reply_writer_id)
-    	values (s86_board_reply_no.nextval, #{postNo}, #{rWriter}, #{rContent}, #{rWriterId})
+    	insert into t86_board_reply (reply_no, no, reply_writer, reply_content)
+    	values (s86_board_reply_no.nextval, #{postNo}, #{rWriter}, #{rContent})
     </insert>
     <select id="getReplyListAll" parameterType="int" resultType="reply">
     	select reply_no as replyNo, 
     			no as postNo, 
     			reply_writer as rWriter, 
     			reply_content as rContent, 
-    			reply_regdate as rRegDate,
-    			reply_writer_id as rWriterId
+    			reply_regdate as rRegDate
     	from t86_board_reply
     	where no = #{postNo}
     </select>

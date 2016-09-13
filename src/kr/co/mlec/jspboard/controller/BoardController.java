@@ -137,9 +137,9 @@ public class BoardController
 		board.setTitle(mRequest.getParameter("title"));
 		board.setWriter(mRequest.getParameter("writer"));
 		board.setContent(mRequest.getParameter("content"));
-		HttpSession session = request.getSession();
-		Member mem = (Member) session.getAttribute("user");
-		board.setWriterId(mem.getId());
+//		HttpSession session = request.getSession();
+//		Member mem = (Member) session.getAttribute("user");
+//		board.setWriterId(mem.getId());
 
 		int postNo = service.insertBoard(board);
 
