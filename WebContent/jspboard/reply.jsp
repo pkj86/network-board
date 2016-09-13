@@ -20,9 +20,9 @@
 	#replyList{
 		width: 80%;
 		box-sizing: border-box;
-		border: 1px solid blue;
+		border: 5px solid #331100;
 		border-radius: 5px;
-		background-color: #B8EDFF;
+		background-color: #ffcc00;
 	}
 	span{
 		box-sizing: border-box;
@@ -37,27 +37,27 @@
 		text-align: center;
 		border: none;
 		width: 20%;
-		border-right: 1px dotted blue;
-		border-bottom: 1px dotted blue;
+		border-right: 3px dotted #331100;
+		border-bottom: 3px dotted #331100;
 	}
 	.rContent{
 		border: none;
 		width: 50%;
-		border-right: 1px dotted blue;
-		border-bottom: 1px dotted blue;
+		border-right: 3px dotted #331100;
+		border-bottom: 3px dotted #331100;
 		padding-left: 20px;
 	}
 	.rTime{
 		text-align: center;
 		border: none;
 		width: 20%;
-		border-right: 1px dotted blue;
-		border-bottom: 1px dotted blue;
+		border-right: 3px dotted #331100;
+		border-bottom: 3px dotted #331100;
 	}
 	.btns{
 		text-align: center;
 		border: none;
-		border-bottom: 1px dotted blue;
+		border-bottom: 3px dotted #331100;
 		width: 10%;
 	}
 	#replyUpdateDiv{

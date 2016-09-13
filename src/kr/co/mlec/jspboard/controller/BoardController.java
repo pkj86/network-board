@@ -14,8 +14,10 @@ import javax.servlet.http.HttpServletResponse;
 import com.google.gson.Gson;
 import com.oreilly.servlet.MultipartRequest;
 
+import framework.Controller;
 import framework.ModelAndView;
 import framework.RequestMapping;
+import framework.RequestParam;
 import framework.WebUtil;
 import kr.co.mlec.file.BitFileRenamePolicy;
 import kr.co.mlec.jspboard.BoardVO;
@@ -24,6 +26,7 @@ import kr.co.mlec.jspboard.ReplyVO;
 import kr.co.mlec.jspboard.service.BoardService;
 import kr.co.mlec.jspboard.service.BoardServiceImpl;
 
+@Controller
 public class BoardController
 {
 	private BoardService service;
@@ -33,43 +36,38 @@ public class BoardController
 	}
 	
 	@RequestMapping("/jspboard/writeReply.do")
-	public ModelAndView writeReplyAjax(HttpServletRequest request, HttpServletResponse response) throws Exception, IOException
+	public String writeReplyAjax(int postNo, ReplyVO rVO) throws Exception, IOException
 	{
-		int postNo = Integer.parseInt(request.getParameter("postNo"));
-		service.insertReply((ReplyVO)WebUtil.getParamToVO(ReplyVO.class, request));
-		return new ModelAndView("ajax:" + new Gson().toJson(service.replyList(postNo)));		
+		service.insertReply(rVO);
+		return "ajax:" + new Gson().toJson(service.replyList(postNo));		
 	}	
 	@RequestMapping("/jspboard/deleteReply.do")
-	public ModelAndView deleteReplyAjax(HttpServletRequest request, HttpServletResponse response) throws Exception, IOException 
-	{
-		int postNo = Integer.parseInt(request.getParameter("postNo"));
-		int replyNo = Integer.parseInt(request.getParameter("replyNo"));
-		
+	public String deleteReplyAjax(int postNo, int replyNo) throws Exception, IOException 
+	{		
 		service.replyDelete(replyNo);
 		
-		return new ModelAndView("ajax:" + new Gson().toJson(service.replyList(postNo)));
+		return "ajax:" + new Gson().toJson(service.replyList(postNo));
 	}
 	@RequestMapping("/jspboard/updateReply.do")
-	public ModelAndView updateReplyAjax(HttpServletRequest request, HttpServletResponse response) throws Exception, IOException 
+	public String updateReplyAjax(@RequestParam("rVO") ReplyVO rVO) throws Exception, IOException 
 	{
-		int replyNo = Integer.parseInt(request.getParameter("replyNo"));
-		
-		ReplyVO rVO = new ReplyVO();
-		rVO.setrContent(request.getParameter("replyContent"));
-		rVO.setReplyNo(replyNo);
+//		int replyNo = Integer.parseInt(request.getParameter("replyNo"));
+//		
+//		ReplyVO rVO = new ReplyVO();
+//		rVO.setrContent(request.getParameter("replyContent"));
+//		rVO.setReplyNo(replyNo);
 		service.updateReply(rVO);
 		
-		return new ModelAndView("ajax:{}");
+		return "ajax:{}";
 	}
 	@RequestMapping("/jspboard/replyList.do")
-	public ModelAndView replyListAjax(HttpServletRequest request, HttpServletResponse response) throws Exception, IOException
+	public String replyListAjax(int postNo) throws Exception, IOException
 	{
-		return new ModelAndView("ajax:" + new Gson().toJson(service.replyList(Integer.parseInt(request.getParameter("postNo")))));
+		return "ajax:" + new Gson().toJson(service.replyList(postNo));
 	}
 	@RequestMapping("/jspboard/detail.do")
-	public ModelAndView detail(HttpServletRequest request, HttpServletResponse response) throws Exception, IOException
+	public ModelAndView detail(int postNo) throws Exception, IOException
 	{
-		int postNo = Integer.parseInt(request.getParameter("postNo"));
 		BoardVO vo = service.selectOne(postNo);
 		FileVO fVo = service.selectFileByNo(postNo);
 		ModelAndView mav = new ModelAndView("detail.jsp");
@@ -78,15 +76,14 @@ public class BoardController
 		return mav;
 	}
 	@RequestMapping("/jspboard/delete.do")
-	public ModelAndView delete(HttpServletRequest request, HttpServletResponse response) throws Exception, IOException
+	public String delete(int postNo) throws Exception, IOException
 	{
-		int no = Integer.parseInt(request.getParameter("postNo"));
-		service.deleteBoard(no);
+		service.deleteBoard(postNo);
 		
-		return new ModelAndView("redirect:list.do");
+		return "redirect:list.do";
 	}
 	@RequestMapping("/jspboard/list.do")
-	public ModelAndView list(HttpServletRequest request, HttpServletResponse response) throws Exception, IOException
+	public ModelAndView list() throws Exception, IOException
 	{
 		List<BoardVO> list = service.list();
 		
@@ -95,16 +92,16 @@ public class BoardController
 		return mav;
 	}
 	@RequestMapping("/jspboard/update.do")
-	public ModelAndView update(HttpServletRequest request, HttpServletResponse response) throws Exception, IOException
+	public String update(BoardVO board) throws Exception, IOException
 	{		
-		BoardVO board = (BoardVO)WebUtil.getParamToVO(BoardVO.class, request);
+		//BoardVO board = (BoardVO)WebUtil.getParamToVO(BoardVO.class, request);
 
 		service.updateBoard(board);
 		
-		return new ModelAndView("redirect:list.do");
+		return "redirect:list.do";
 	}	
 	@RequestMapping("/jspboard/updateForm.do")
-	public ModelAndView updateForm(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException
+	public ModelAndView updateForm(int postNo) throws ServletException, IOException
 	{
 		BoardVO vo = new BoardVO();
 		
@@ -113,7 +110,7 @@ public class BoardController
 		return mav;
 	}	
 	@RequestMapping("/jspboard/write.do")
-	public ModelAndView write(HttpServletRequest request, HttpServletResponse response) throws Exception, IOException
+	public String write(HttpServletRequest request) throws Exception, IOException
 	{				
 		SimpleDateFormat sdf = new SimpleDateFormat("/yyyy/MM/dd");
 		String path = sdf.format(new Date());
@@ -127,7 +124,7 @@ public class BoardController
 		MultipartRequest mRequest = new MultipartRequest(
 				request, 
 				realPath,	
-				1024 * 1024 * 100,	
+				1024 * 1024 * 100,
 				"UTF-8",	
 				new BitFileRenamePolicy()	
 				);
@@ -154,11 +151,8 @@ public class BoardController
 			fVo.setFileSize(size);
 			service.insertFile(fVo);			
 		}
-		return new ModelAndView("redirect:list.do");
+		return "redirect:list.do";
 	}
 	@RequestMapping("/jspboard/writeForm.do")
-	public ModelAndView writeForm(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException
-	{
-		return new ModelAndView("writeForm.jsp");
-	}
+	public void writeForm() throws ServletException, IOException {}
 }

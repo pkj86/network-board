@@ -14,10 +14,11 @@ import framework.ModelAndView;
 import framework.RequestMapping;
 import kr.co.mlec.member.Member;
 
+@Controller
 public class LoginController
 {
 	@RequestMapping("/login/login.do")
-	public ModelAndView login(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException 
+	public String login(HttpServletRequest request) throws ServletException, IOException 
 	{
 		request.setCharacterEncoding("utf-8");
 		
@@ -37,27 +38,25 @@ public class LoginController
 			m.setEmail("sbc@a.com");
 			
 			HttpSession session = request.getSession();
-			session.setAttribute("user", m);		
-			return new ModelAndView("redirect:"+request.getContextPath()+"/index.jsp");
+			session.setAttribute("user", m);
+			return "redirect:" + request.getContextPath() + "/index.jsp";
 		}
 		// 로그인 실패
 		// 로그인 폼 페이지로 이동
 		else {		
-			return new ModelAndView("redirect:loginForm.do");
+			return "redirect:loginForm.do";
 		}
 	}
 	@RequestMapping("/login/loginForm.do")
-	public ModelAndView loginForm(HttpServletRequest request, HttpServletResponse response)	throws ServletException, IOException 
-	{
-		return new ModelAndView("loginForm.jsp");
-	}
+	public void loginForm()	throws ServletException, IOException {}
+	
 	@RequestMapping("/login/logout.do")
-	public ModelAndView execute(HttpServletRequest request, HttpServletResponse response) throws Exception, IOException 
+	public String execute(HttpServletRequest request) throws Exception, IOException 
 	{
 		HttpSession session = request.getSession();
 		session.invalidate();
 		
-		return new ModelAndView("redirect:"+request.getContextPath()+"/index.jsp");
+		return "redirect:"+request.getContextPath()+"/index.jsp";
 	}
 }
 
