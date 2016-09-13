@@ -5,6 +5,7 @@ import java.util.List;
 import kr.co.mlec.jspboard.BoardVO;
 import kr.co.mlec.jspboard.FileVO;
 import kr.co.mlec.jspboard.ReplyVO;
+import kr.co.mlec.member.Member;
 
 public interface BoardService
 {
@@ -32,4 +33,6 @@ public interface BoardService
 	public void insertFile(FileVO fVo);
 	/** 댓글 목록 조회 처리 */
 	public List<ReplyVO> replyList(int postNo) throws Exception;
+	/** 회원 로그인 처리 */
+	public Member loginUser(Member loginUser) throws Exception;
 }

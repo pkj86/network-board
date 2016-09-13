@@ -12,52 +12,59 @@ import javax.servlet.http.HttpSession;
 import framework.Controller;
 import framework.ModelAndView;
 import framework.RequestMapping;
+import kr.co.mlec.jspboard.service.BoardService;
+import kr.co.mlec.jspboard.service.BoardServiceImpl;
 import kr.co.mlec.member.Member;
 
+@Controller
 public class LoginController
 {
+	private BoardService service;
+	public LoginController()
+	{
+		this.service = new BoardServiceImpl();
+	}
+	
 	@RequestMapping("/login/login.do")
-	public ModelAndView login(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException 
+	public String login(HttpServletRequest request) throws Exception
 	{
 		request.setCharacterEncoding("utf-8");
 		
 		// 로그인 처리 
 		// 사용자 입력 파라미터 얻기
-		String id = request.getParameter("id");
-		String pass = request.getParameter("pass");
-		
+		Member loginUser = new Member();
+		loginUser.setId(request.getParameter("id"));
+		loginUser.setPass(request.getParameter("pass"));
 		// id = a, pass = 1 이 경우 로그인 성공
 		// 메인페이지로 이동
 		// 세션에 정보를 설정한다.
-		if ("a".equals(id) && "1".equals(pass)) {
-			Member m = new Member();
-			m.setId(id);
-			m.setPass(pass);
-			m.setName("테스터");
-			m.setEmail("sbc@a.com");
+		Member m = service.loginUser(loginUser);		
+		if (m != null) {
+//			m.setId(id);
+//			m.setPass(pass);
+//			m.setName("테스터");
+//			m.setEmail("sbc@a.com");
 			
 			HttpSession session = request.getSession();
-			session.setAttribute("user", m);		
-			return new ModelAndView("redirect:"+request.getContextPath()+"/index.jsp");
+			session.setAttribute("user", m);
+			return "redirect:" + request.getContextPath() + "/index.jsp";
 		}
 		// 로그인 실패
 		// 로그인 폼 페이지로 이동
 		else {		
-			return new ModelAndView("redirect:loginForm.do");
+			return "redirect:loginForm.do";
 		}
 	}
 	@RequestMapping("/login/loginForm.do")
-	public ModelAndView loginForm(HttpServletRequest request, HttpServletResponse response)	throws ServletException, IOException 
-	{
-		return new ModelAndView("loginForm.jsp");
-	}
+	public void loginForm()	throws ServletException, IOException {}
+	
 	@RequestMapping("/login/logout.do")
-	public ModelAndView execute(HttpServletRequest request, HttpServletResponse response) throws Exception, IOException 
+	public String execute(HttpServletRequest request) throws Exception, IOException 
 	{
 		HttpSession session = request.getSession();
 		session.invalidate();
 		
-		return new ModelAndView("redirect:"+request.getContextPath()+"/index.jsp");
+		return "redirect:"+request.getContextPath()+"/index.jsp";
 	}
 }
 

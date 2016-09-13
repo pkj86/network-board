@@ -5,6 +5,7 @@ import java.util.List;
 import org.apache.ibatis.session.SqlSession;
 
 import common.db.MyAppSqlConfig;
+import kr.co.mlec.member.Member;
 
 public class BoardDAO
 {
@@ -89,4 +90,16 @@ public class BoardDAO
 		sqlMapper.update("jspboard.BoardDAO.updateReply", rVo); 
 		sqlMapper.commit();
 	}
+
+	public Member loginUser(Member loginUser)
+	{
+		return sqlMapper.selectOne("jspboard.BoardDAO.loginUser", loginUser);
+	}
+	
+	public BoardVO temp(int findNo)
+	{
+		BoardVO vo = new BoardVO();
+		vo = sqlMapper.selectOne("jspboard.BoardDAO.getBoardListOne", findNo);
+		return vo;
+	} 
 }

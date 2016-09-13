@@ -20,9 +20,9 @@
 	#replyList{
 		width: 80%;
 		box-sizing: border-box;
-		border: 1px solid blue;
+		border: 5px solid #331100;
 		border-radius: 5px;
-		background-color: #B8EDFF;
+		background-color: #ffcc00;
 	}
 	span{
 		box-sizing: border-box;
@@ -37,27 +37,27 @@
 		text-align: center;
 		border: none;
 		width: 20%;
-		border-right: 1px dotted blue;
-		border-bottom: 1px dotted blue;
+		border-right: 3px dotted #331100;
+		border-bottom: 3px dotted #331100;
 	}
 	.rContent{
 		border: none;
 		width: 50%;
-		border-right: 1px dotted blue;
-		border-bottom: 1px dotted blue;
+		border-right: 3px dotted #331100;
+		border-bottom: 3px dotted #331100;
 		padding-left: 20px;
 	}
 	.rTime{
 		text-align: center;
 		border: none;
 		width: 20%;
-		border-right: 1px dotted blue;
-		border-bottom: 1px dotted blue;
+		border-right: 3px dotted #331100;
+		border-bottom: 3px dotted #331100;
 	}
 	.btns{
 		text-align: center;
 		border: none;
-		border-bottom: 1px dotted blue;
+		border-bottom: 3px dotted #331100;
 		width: 10%;
 	}
 	#replyUpdateDiv{
@@ -113,7 +113,7 @@
 	<!-- <tr> -->
 		<!-- <td align="center"> -->
 		<input type="hidden" name="postNo" value="${param.postNo}"/>
-		<input type='text' size='10px' name='rWriter' placeholder='작성자를 입력'/>
+		<input type='text' size='10px' name='rWriter' readonly="readonly" value="${user.name}"/>
 		<!-- </td> -->
 		<!-- <td align="center"> -->
 		<textarea cols='150' rows="1" name='rContent'>댓글 내용을 입력</textarea>
@@ -153,8 +153,14 @@
 					 + date.getHours() + ":" + date.getMinutes() + ":" + date.getSeconds();
 			html += "<span class='rTime'>"+time+"</span>";
 			html += "<span class='btns'>";
-			html += "<a href='#1' onclick='replyUpdate("+reply.replyNo+");'>수정</a>";
-			html += "<a href='#1' onclick='replyDelete("+reply.replyNo+");'>삭제</a>";
+			if('${user.name}' == reply.rWriter)
+			{
+				html += "<a href='#1' onclick='replyUpdate("+reply.replyNo+");'>수정</a>";
+				html += "<a href='#1' onclick='replyDelete("+reply.replyNo+");'>삭제</a>";				
+			}else
+			{
+				html += "&nbsp;";
+			}
 			html += "</span>";
 			html += "</div>";
 		}

@@ -6,6 +6,7 @@ import kr.co.mlec.jspboard.BoardDAO;
 import kr.co.mlec.jspboard.BoardVO;
 import kr.co.mlec.jspboard.FileVO;
 import kr.co.mlec.jspboard.ReplyVO;
+import kr.co.mlec.member.Member;
 
 public class BoardServiceImpl implements BoardService
 {
@@ -85,5 +86,11 @@ public class BoardServiceImpl implements BoardService
 	public void updateReply(ReplyVO rVo) throws Exception
 	{
 		dao.updateReply(rVo);
-	}	
+	}
+
+	@Override
+	public Member loginUser(Member loginUser) throws Exception
+	{		
+		return dao.loginUser(loginUser);
+	}
 }

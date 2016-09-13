@@ -5,11 +5,29 @@ import java.util.Date;
 public class BoardVO
 {
 	private int postNo;
+	private int viewCnt;
 	private String writer;
 	private String title;
 	private String content;
+	private String writerId;
 	private Date regDate;
 	
+	public int getViewCnt()
+	{
+		return viewCnt;
+	}
+	public void setViewCnt(int viewCnt)
+	{
+		this.viewCnt = viewCnt;
+	}
+	public String getWriterId()
+	{
+		return writerId;
+	}
+	public void setWriterId(String writerId)
+	{
+		this.writerId = writerId;
+	}	
 	public int getPostNo()
 	{
 		return postNo;

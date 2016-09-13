@@ -18,11 +18,13 @@
 <table width='80%' border='1'>
 <tr>
 	<th>글제목</th>
-	<td><input type='text' name='title' size=50 placeholder='글 제목을 입력하세요' /></td>
+	<td><input type='text' name='title' size=50 placeholder='글 제목을 입력하세요' />
+	</td>
+	
 </tr>
 <tr>
 	<th>글쓴이</th>
-	<td><input type='text' name='writer' size=30 placeholder='글쓴이를 입력하세요'/></td>
+	<td><input type='text' name='writer' size=30 readonly="readonly" value="${user.name}"/></td>
 </tr>
 <tr>
 	<th>글내용</th>

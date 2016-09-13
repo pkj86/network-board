@@ -73,8 +73,11 @@ if(vo != null)
 		</c:choose>
 		</td>
 	</tr>
-	<tr><td colspan='2'><input type='submit' value='글 수정'/>
+	<tr><td colspan='2'>
+		<c:if test="${user.name == vo.writer}">
 		<input type='button' value='글 삭제하기' onclick="location.href='delete.do?postNo=<c:out value="${param.postNo}"/>'"/>
+		<input type='submit' value='글 수정'/>
+		</c:if>
 		<input type='button' value='목록으로' onclick="location.href='list.do'"/></td></tr>
 	</table>
 	<hr>

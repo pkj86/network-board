@@ -7,8 +7,22 @@ create table t86_board_file
 	file_path varchar2(100) not null,
 	file_size number not null
 );
+create table t86_board_user
+(
+	no number(6) primary key,
+	id varchar(100) not null,
+	pass varchar(100) not null,
+	name varchar(100) not null,
+	email varchar(100)
+);
+
+select max(no) from T86_BOARD_USER;
+insert into T86_BOARD_USER
+values (2, 'a', '1', '테스터', 'tester@t86board.com');
 create sequence s86_board_file_no;
 select * from t86_board_file;
+select * from t86_board;
+
 delete from t86_board_file where no = 124;
 
 create table t86_board_reply

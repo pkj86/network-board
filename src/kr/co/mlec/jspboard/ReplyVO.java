@@ -8,8 +8,17 @@ public class ReplyVO
 	private int postNo;
 	private String rWriter;
 	private String rContent;
+	private String rWriterId;
 	private Date rRegDate;
 	
+	public String getrWriterId()
+	{
+		return rWriterId;
+	}
+	public void setrWriterId(String rWriterId)
+	{
+		this.rWriterId = rWriterId;
+	}
 	public int getReplyNo()
 	{
 		return replyNo;

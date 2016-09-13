@@ -11,6 +11,7 @@
 		<typeAlias alias="board" type="kr.co.mlec.jspboard.BoardVO" />
 		<typeAlias alias="file" type="kr.co.mlec.jspboard.FileVO" />
 		<typeAlias alias="reply" type="kr.co.mlec.jspboard.ReplyVO" />
+		<typeAlias alias="user" type="kr.co.mlec.member.Member" />
 		<!--  <typeAlias alias="search" type="kr.co.mlec.member.SearchVO" /> -->
 	</typeAliases>
 	
