@@ -26,11 +26,7 @@ public class LoginController
 	}
 	
 	@RequestMapping("/login/login.do")
-<<<<<<< HEAD
 	public String login(HttpServletRequest request) throws Exception
-=======
-	public String login(HttpServletRequest request) throws ServletException, IOException 
->>>>>>> d60fe643acd7dc7d85c79efd40e69e9d9c8981eb
 	{
 		request.setCharacterEncoding("utf-8");
 		
